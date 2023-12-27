@@ -4,6 +4,7 @@
   background-color: var(--bg-color);
   font-family: var(--main-font);
   font-size: var(--font-size-m);
+
   background-image: var(--bg-image);
   background-attachment: fixed;
   background-repeat: no-repeat;
