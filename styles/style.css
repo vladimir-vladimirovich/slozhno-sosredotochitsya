@@ -386,14 +386,14 @@
 
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> FOOTER MEDIA >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
 
-@media (375px <= width) {
+@media (768px <= width) {
   .footer {
     padding: var(--medium-ten-to-twenty-pixels-shift);
     margin-block-start: 60px;
   }
 }
 
-@media (768px <= width) {
+@media (1024px <= width) {
   .footer__text {
     font-size: clamp(7.5rem, 0.5625rem + 14.4531vw, 9.8125rem);
     text-shadow: 4px 4px 0px var(--title-accent-color);
