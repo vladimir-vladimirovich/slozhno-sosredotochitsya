@@ -2,3 +2,21 @@
   Переменные для вашего проекта
   и их переопределение под различные устройства
 */
+
+:root {
+  --bg-color: #000028;
+  --accent-color: #ff0070;
+  --text-color: #000028;
+  --title-color: #db00ff;
+
+  --main-font: "IBM Plex mono", sans-serif;
+  --font-size-m: 18px;
+
+  /* @media переменные 365 < width */
+  /* Плавно меняем отступ с 10px на 20px */
+  --medium-ten-to-twenty-pixels-shift: clamp(
+    0.625rem,
+    0.0286rem + 2.5445vw,
+    1.25rem
+  );
+}

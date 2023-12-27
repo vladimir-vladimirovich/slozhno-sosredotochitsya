@@ -1,5 +1,456 @@
 /* Основные стили проекта. Это стили для темы, которую вы верстаете первой. */
-
 .page {
   /* сохраните в разметке и стилях класс page. На его основе работает скрипт. */
+  background-color: var(--bg-color);
+  font-family: var(--main-font);
+  font-size: var(--font-size-m);
+  background-image: var(--bg-image);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.title-decor {
+  color: var(--text-color);
+  background-color: var(--accent-color);
+  font-weight: bold;
+  line-height: 130%;
+  font-size: var(--font-size-m);
+}
+
+.title-decor-normal {
+  font-weight: normal;
+}
+
+.header {
+  background-image: var(--bg-image);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: repeat(3, 1fr);
+
+  min-height: 668px;
+  position: relative;
+  padding: 10px;
+}
+
+.header::after {
+  content: "";
+  width: 25px;
+  height: 25px;
+  border-block-start: 1px solid var(--accent-color);
+  border-inline-end: 1px solid var(--accent-color);
+  position: absolute;
+  inset-inline-end: 10px;
+  inset-block-start: 10px;
+}
+
+.header::before {
+  content: "";
+  width: 25px;
+  height: 25px;
+  border-inline-start: 1px solid var(--accent-color);
+  border-block-end: 1px solid var(--accent-color);
+  position: absolute;
+  inset-block-end: 10px;
+  inset-inline-start: 10px;
+}
+
+.header__rec {
+  display: var(--header-display-rec);
+  color: var(--accent-color);
+  line-height: 25px;
+  position: absolute;
+  inset-inline-end: 39px;
+  inset-block-start: 10px;
+}
+
+.header__rec::after {
+  content: "";
+  width: 11px;
+  height: 11px;
+  filter: drop-shadow(0px 0px 4px var(--accent-color));
+  background-color: var(--accent-color);
+  border-radius: 50%;
+  position: absolute;
+  inset-block-start: 50%;
+  transform: translateY(-50%);
+  inset-inline-end: -21px;
+}
+
+.header__theme-menu {
+  align-self: center;
+  justify-self: end;
+}
+
+.header__theme-menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.header__content {
+  align-self: center;
+}
+
+.header__title {
+  /* Для мобильных */
+  font-size: clamp(7.25rem, 7.0115rem + 1.0178vw, 7.5rem);
+  font-style: normal;
+  line-height: 82.5%;
+  color: var(--title-color);
+  text-shadow: 4px 4px 0px var(--accent-color);
+}
+
+.header__theme-menu-button {
+  background-color: transparent;
+  border: none;
+  color: var(--header-button-color);
+  border-color: currentColor;
+  text-transform: lowercase;
+  line-height: 100%;
+  font-weight: normal;
+  padding: 0 13px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__theme-menu-button:hover {
+  cursor: pointer;
+  outline: 1px solid currentColor;
+}
+
+.header__theme-menu-button:focus-visible {
+  border-block-end: 1px solid currentColor;
+}
+
+.header__theme-menu-button_active {
+  border: 1px solid currentColor;
+  pointer-events: none;
+}
+
+/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> HEADER MEDIA >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
+@media (375px < width) {
+  .header {
+    padding: var(--medium-ten-to-twenty-pixels-shift);
+  }
+
+  .header__title {
+    /* Плавно сдвигаем заголовок к левому краю */
+    margin-inline-start: calc(
+      clamp(0rem, -1.1927rem + 5.0891vw, 1.25rem) * (-1)
+    );
+  }
+
+  .header__rec {
+    inset-inline-end: clamp(2.4rem, 1.8275rem + 2.4427vw, 3rem);
+    inset-block-start: var(--medium-ten-to-twenty-pixels-shift);
+  }
+
+  .header::after {
+    inset-inline-end: var(--medium-ten-to-twenty-pixels-shift);
+    inset-block-start: var(--medium-ten-to-twenty-pixels-shift);
+  }
+
+  .header::before {
+    inset-block-end: var(--medium-ten-to-twenty-pixels-shift);
+    inset-inline-start: var(--medium-ten-to-twenty-pixels-shift);
+  }
+
+  .header__content p {
+    /* Чтобы параграф прилипнув к правому краю и плавно уменьшался.
+    Считал тут: https://clamp.vittoretrivi.dev/
+    значения: 
+      Viewport  768 to 375
+      Width     22.7 to 48 */
+    max-width: clamp(22.7rem, 72.1412rem + -103.0025vw, 48rem);
+  }
+
+  .header__paragraph {
+    display: flex;
+    flex-direction: row-reverse;
+    position: relative;
+  }
+}
+
+@media (375px < width <= 768px) {
+  .header {
+    /* Чтобы высота хедера плавно увеличивалась по мере увеличения ширины экрана.
+    Динамическую высоту считал на сайте по логике с размером шрифта
+    https://clamp.font-size.app/?config=eyJyb290IjoiMTYiLCJtaW5XaWR0aCI6IjM3NXB4IiwibWF4V2lkdGgiOiI3NjhweCIsIm1pbkZvbnRTaXplIjoiNjY4cHgiLCJtYXhGb250U2l6ZSI6IjEwMjRweCJ9 */
+    height: clamp(668px, 20.5191rem + 90.5852vw, 1024px);
+  }
+
+  .header__theme-menu {
+    position: relative;
+    /* Плавно сдвигаем меню на 55px вниз для соответствия макету  */
+    inset-block-start: clamp(0rem, -3.2443rem + 13.8422vw, 3.4rem);
+  }
+
+  .header__paragraph {
+    /* Плавно сдвигаем параграф на 56px вверх для соответствия макету  */
+    inset-block-end: clamp(0rem, -3.3397rem + 14.2494vw, 3.5rem);
+  }
+}
+
+@media (768px < width) {
+  .header {
+    /* Чтобы высота хедера плавно увеличивалась по мере увеличения ширины экрана.
+    Динамическую высоту считал на сайте по логике с размером шрифта
+    https://clamp.font-size.app/?config=eyJyb290IjoiMTYiLCJtaW5XaWR0aCI6IjM3NXB4IiwibWF4V2lkdGgiOiI3NjhweCIsIm1pbkZvbnRTaXplIjoiNjY4cHgiLCJtYXhGb250U2l6ZSI6IjEwMjRweCJ9 */
+    height: clamp(48rem, 112rem + -100vw, 64rem);
+  }
+
+  .header__title {
+    text-shadow: 4px 4px 0px var(--title-accent-color);
+    font-size: clamp(7.5rem, 0.5625rem + 14.4531vw, 9.8125rem);
+  }
+
+  .header__theme-menu {
+    justify-self: center;
+    align-self: start;
+  }
+
+  .header__theme-menu-list {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .header__content p {
+    /* Чтобы параграф прилипнув к правому краю и плавно уменьшался.
+    Считал тут: https://clamp.vittoretrivi.dev/
+    значения: 
+      Viewport  1024 to 768
+      Width     22.7 to 48 */
+    max-width: clamp(22.75rem, -1.0625rem + 49.6094vw, 30.6875rem);
+  }
+
+  .header__paragraph {
+    /* Плавно сдвигаем параграф на с 56px на 28px вверх для соответствия макету  */
+    inset-block-end: clamp(1.75rem, 8.75rem + -10.9375vw, 3.5rem);
+  }
+}
+
+.content {
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.section:first-child {
+  margin-block-start: 40px;
+}
+
+.content__title {
+  background-color: transparent;
+  color: var(--content__title-color);
+  overflow-wrap: break-word;
+}
+
+.content__article {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.content__paragraph {
+  color: var(--content__text-color);
+  line-height: 130%;
+}
+
+.content__link {
+  text-shadow: 2px 2px 0px var(--accent-color);
+  text-decoration: none;
+}
+
+.content__link:hover {
+  cursor: pointer;
+  border-block-end: 1px solid currentColor;
+}
+
+.content__link:focus-visible {
+  outline: 1px solid currentColor;
+}
+
+/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> MAIN MEDIA >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
+
+@media (375px < width) {
+  .content {
+    padding: 0 20px;
+    gap: 80px;
+  }
+
+  .section:first-child {
+    margin-block-start: 60px;
+  }
+
+  .section-type-fluid {
+    display: grid;
+    grid-template-columns: 32% auto;
+  }
+
+  .section-type-fluid .content__article {
+    grid-column: 2/3;
+  }
+
+  .section-type-fluid .content__title {
+    grid-row: 1/3;
+  }
+
+  .section-type-stretchy .content__title {
+    max-width: 32%;
+  }
+}
+
+@media (768px < width) {
+  .section-type-stretchy {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .section-type-stretchy .content__title {
+    grid-column: 1/4;
+  }
+}
+
+.gallery {
+  gap: 10px;
+}
+
+.gallery__content-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.gallery__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> GALLERY MEDIA >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
+
+@media (375px < width) {
+  .gallery {
+    gap: 20px;
+  }
+
+  .gallery__content-block {
+    display: grid;
+    gap: 20px;
+    grid-template-areas:
+      "img__sunset-container img__sunset-container img__ice-cream-container"
+      "img__tape-container img__books-container img__ice-cream-container"
+      "img__tape-container img__street-container img__street-container";
+  }
+
+  .img__sunset-container {
+    grid-area: img__sunset-container;
+  }
+
+  .img__ice-cream-container {
+    grid-area: img__ice-cream-container;
+  }
+
+  .img__tape-container {
+    grid-area: img__tape-container;
+  }
+
+  .img__books-container {
+    grid-area: img__books-container;
+  }
+
+  .img__street-container {
+    grid-area: img__street-container;
+  }
+}
+
+.footer {
+  min-height: 668px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+  margin-block-start: 40px;
+  position: relative;
+}
+
+.footer__title {
+  font-size: clamp(7.25rem, 7.0115rem + 1.0178vw, 7.5rem);
+  color: var(--title-color);
+  text-shadow: 2px 2px 0px var(--title-accent-color);
+  font-weight: bold;
+}
+
+.footer::after {
+  content: "";
+  width: 25px;
+  height: 25px;
+  border-block-start: 1px solid var(--accent-color);
+  border-inline-end: 1px solid var(--accent-color);
+  position: absolute;
+  inset-inline-end: 10px;
+  inset-block-start: 10px;
+}
+
+.footer::before {
+  content: "";
+  width: 25px;
+  height: 25px;
+  border-inline-start: 1px solid var(--accent-color);
+  border-block-end: 1px solid var(--accent-color);
+  position: absolute;
+  inset-block-end: 10px;
+  inset-inline-start: 10px;
+}
+
+/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> FOOTER MEDIA >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
+
+@media (375px < width) {
+  .footer {
+    padding: var(--medium-ten-to-twenty-pixels-shift);
+    margin-block-start: 60px;
+  }
+
+  .footer::after {
+    inset-inline-end: var(--medium-ten-to-twenty-pixels-shift);
+    inset-block-start: var(--medium-ten-to-twenty-pixels-shift);
+  }
+
+  .footer::before {
+    inset-block-end: var(--medium-ten-to-twenty-pixels-shift);
+    inset-inline-start: var(--medium-ten-to-twenty-pixels-shift);
+  }
+}
+
+@media (375px < width <= 768px) {
+  .footer {
+    height: clamp(668px, 20.5191rem + 90.5852vw, 1024px);
+  }
+}
+
+@media (768px < width) {
+  .footer {
+    height: clamp(48rem, 112rem + -100vw, 64rem);
+  }
+
+  .footer__title {
+    font-size: clamp(7.5rem, 0.5625rem + 14.4531vw, 9.8125rem);
+    text-shadow: 4px 4px 0px var(--title-accent-color);
+  }
 }
