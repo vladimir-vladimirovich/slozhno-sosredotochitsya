@@ -391,7 +391,7 @@
   position: relative;
 }
 
-.footer__title {
+.footer__text {
   font-size: clamp(7.25rem, 7.0115rem + 1.0178vw, 7.5rem);
   color: var(--title-color);
   text-shadow: 2px 2px 0px var(--title-accent-color);
@@ -450,7 +450,7 @@
     height: clamp(48rem, 112rem + -100vw, 64rem);
   }
 
-  .footer__title {
+  .footer__text {
     font-size: clamp(7.5rem, 0.5625rem + 14.4531vw, 9.8125rem);
     text-shadow: 4px 4px 0px var(--title-accent-color);
   }
